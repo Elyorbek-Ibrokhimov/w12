@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Region, District, School, Sinf
+from .models import Region, District, School, Sinf, Student
 
 class RegionAdmin(admin.ModelAdmin):
     list_display = ('name',)
@@ -20,7 +20,13 @@ class SinfAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     list_filter = ('school',)
 
+class StudentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'sinf')
+    search_fields = ('name',)
+    list_filter = ('sinf',)
+
 admin.site.register(Region, RegionAdmin)
 admin.site.register(District, DistrictAdmin)
 admin.site.register(School, SchoolAdmin)
 admin.site.register(Sinf, SinfAdmin)
+admin.site.register(Student, StudentAdmin)

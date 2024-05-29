@@ -35,3 +35,10 @@ class LocationForm(forms.Form):
                 self.fields['sinf'].queryset = Sinf.objects.none()
         else:
             self.fields['sinf'].queryset = Sinf.objects.none()
+
+from .models import Student
+
+class StudentForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = ['name', 'sinf']  # O'zgartirishingiz mumkin

@@ -29,3 +29,12 @@ class Sinf(models.Model):
 
     def __str__(self):
         return self.name
+
+class Student(models.Model):
+    name = models.CharField(max_length=100)
+    sinf = models.ForeignKey(Sinf, on_delete=models.CASCADE)  # Sinfga bog'langan
+
+    def __str__(self):
+        return self.name
+
+
