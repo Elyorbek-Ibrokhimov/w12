@@ -1,8 +1,14 @@
-# myapp/templatetags/helper.py
+# helper.py
 from django import template
 
 register = template.Library()
 
 @register.filter(name='add_class')
 def add_class(value, arg):
-    return value.as_widget(attrs={'class': arg})
+    css_classes = value.field.widget.attrs.get('class', '')
+    if css_classes:
+        css_classes += ' ' + arg
+    else:
+        css_classes = arg
+    value.field.widget.attrs['class'] = css_classes
+    return value

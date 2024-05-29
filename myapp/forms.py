@@ -17,7 +17,7 @@ class LocationForm(forms.Form):
                 self.fields['district'].queryset = District.objects.none()
         else:
             self.fields['district'].queryset = District.objects.none()
-        
+
         if 'district' in self.data:
             try:
                 district_id = int(self.data.get('district'))
@@ -26,7 +26,7 @@ class LocationForm(forms.Form):
                 self.fields['school'].queryset = School.objects.none()
         else:
             self.fields['school'].queryset = School.objects.none()
-        
+
         if 'school' in self.data:
             try:
                 school_id = int(self.data.get('school'))
