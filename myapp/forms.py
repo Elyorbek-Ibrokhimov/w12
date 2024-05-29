@@ -13,7 +13,5 @@ class LocationForm(forms.Form):
                 self.fields['district'].queryset = District.objects.filter(region_id=region_id).order_by('name')
             except (ValueError, TypeError):
                 self.fields['district'].queryset = District.objects.none()
-        elif self.instance and self.instance.pk:
-            self.fields['district'].queryset = self.instance.region.district_set.order_by('name')
         else:
             self.fields['district'].queryset = District.objects.none()
