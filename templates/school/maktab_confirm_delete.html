@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ maktab.nomi }}</title>
+</head>
+<body>
+    <h1>{{ maktab.nomi }} ni o'chirishga aminmisiz?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Ha, o'chirish</button>
+    </form>
+    <a href="{% url 'maktab_detail' maktab.pk %}">Yo'q, ortga</a>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ sinf.nomi }} ni o'chirish</title>
+</head>
+<body>
+    <h1>{{ sinf.nomi }} ni o'chirishga aminmisiz?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Ha, o'chirish</button>
+    </form>
+    <a href="{% url 'sinf_detail' sinf.pk %}">Yo'q, ortga</a>
+</body>
+</html>

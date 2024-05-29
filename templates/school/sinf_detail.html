@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ sinf.nomi }}</title>
+</head>
+<body>
+    <h1>{{ sinf.nomi }}</h1>
+    <h2>Studentlar:</h2>
+    <ul>
+        {% for student in studentlar %}
+            <li>
+                {{ student.nomi }}
+                <a href="{% url 'student_edit' student.pk %}">Tahrirlash</a>
+                <form action="{% url 'student_delete' student.pk %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <input type="submit" value="O'chirish">
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'student_create' sinf.pk %}">Yangi Student Qo'shish</a>
+    <a href="{% url 'sinf_edit' sinf.pk %}">Sinfni Tahrirlash</a>
+    <form action="{% url 'sinf_delete' sinf.pk %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Sinfni O'chirish">
+    </form>
+    <a href="{% url 'maktab_detail' sinf.maktab.pk %}">Orqaga</a>
+</body>
+</html>

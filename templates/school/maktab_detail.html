@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ maktab.nomi }}</title>
+</head>
+<body>
+    <h1>{{ maktab.nomi }}</h1>
+    <h2>Sinflar:</h2>
+    <ul>
+        {% for sinf in sinflar %}
+            <li><a href="{% url 'sinf_detail' sinf.pk %}">{{ sinf.nomi }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'maktab_edit' maktab.pk %}">Tahrirlash</a>
+    <form action="{% url 'maktab_delete' maktab.pk %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="O'chirish">
+    </form>
+    <a href="{% url 'maktab_list' %}">Orqaga</a>
+</body>
+</html>

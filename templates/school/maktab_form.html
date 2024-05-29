@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Maktab Formasi</title>
+</head>
+<body>
+    <h1>Maktab Formasi</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Saqlash</button>
+    </form>
+    <a href="{% url 'maktab_list' %}">Orqaga</a>
+</body>
+</html>

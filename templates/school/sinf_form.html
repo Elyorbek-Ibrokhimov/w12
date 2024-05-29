@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sinf Formasi</title>
+</head>
+<body>
+    <h1>Sinf Formasi</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Saqlash</button>
+    </form>
+    <a href="{% url 'maktab_detail' form.instance.maktab.pk %}">Orqaga</a>
+</body>
+</html>

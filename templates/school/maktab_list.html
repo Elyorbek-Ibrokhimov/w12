@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Maktablar</title>
+</head>
+<body>
+    <h1>Maktablar Ro'yxati</h1>
+    <ul>
+        {% for maktab in maktablar %}
+            <li><a href="{% url 'maktab_detail' maktab.pk %}">{{ maktab.nomi }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'maktab_create' %}">Yangi Maktab Qo'shish</a>
+</body>
+</html>
