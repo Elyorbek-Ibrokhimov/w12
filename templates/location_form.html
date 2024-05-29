@@ -1,35 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Location Form</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body>
-    <h1>Location Form</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-    </form>
-    <script>
-        $("#id_region").change(function() {
-            var url = "{% url 'ajax_load_districts' %}";
+<form id="locationForm" method="post" data-districts-url="{% url 'ajax_load_districts' %}" data-schools-url="{% url 'ajax_load_schools' %}" data-sinf-url="{% url 'ajax_load_sinf' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#id_region').change(function () {
+            var url = $('#locationForm').attr('data-districts-url');
             var regionId = $(this).val();
+
             $.ajax({
                 url: url,
                 data: {
                     'region': regionId
                 },
                 success: function (data) {
-                    var options = '<option value="">---------</option>';
-                    for (var i = 0; i < data.length; i++) {
-                        options += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
-                    }
-                    $("#id_district").html(options);
+                    var districtSelect = $('#id_district');
+                    districtSelect.empty();
+                    districtSelect.append('<option value="">---</option>');
+                    $.each(data, function (key, value) {
+                        districtSelect.append('<option value="' + value.id + '">' + value.name + '</option>');
+                    });
+                }
+            });
+
+        });
+
+        $('#id_district').change(function () {
+            var url = $('#locationForm').attr('data-schools-url');
+            var districtId = $(this).val();
+
+            $.ajax({
+                url: url,
+                data: {
+                    'district': districtId
+                },
+                success: function (data) {
+                    var schoolSelect = $('#id_school');
+                    schoolSelect.empty();
+                    schoolSelect.append('<option value="">---</option>');
+                    $.each(data, function (key, value) {
+                        schoolSelect.append('<option value="' + value.id + '">' + value.name + '</option>');
+                    });
                 }
             });
         });
-    </script>
-</body>
-</html>
+
+        $('#id_school').change(function () {
+            var url = $('#locationForm').attr('data-sinf-url');
+            var schoolId = $(this).val();
+
+            $.ajax({
+                url: url,
+                data: {
+                    'school': schoolId
+                },
+                success: function (data) {
+                    var sinfSelect = $('#id_sinf');
+                    sinfSelect.empty();
+                    sinfSelect.append('<option value="">---</option>');
+                    $.each(data, function (key, value) {
+                        sinfSelect.append('<option value="' + value.id + '">' + value.name + '</option>');
+                    });
+                }
+            });
+        });
+    });
+</script>
